@@ -14,10 +14,10 @@ function createFeatures(electricVehicleStations) {
     let stations = L.geoJSON(electricVehicleStations, {
         onEachFeature: onEachFeature,
         pointToLayer: function (feature, latlng) {
-            let fillColor = getMarkerColor(feature); // Get marker color dynamically
+            // let fillColor = getMarkerColor(feature); // Get marker color dynamically
             let markers = {
                 radius: 1,
-                fillColor: fillColor,
+                fillColor: "red",
                 weight: 1,
                 opacity: 1, 
                 color: "black",
@@ -27,20 +27,20 @@ function createFeatures(electricVehicleStations) {
             return L.circleMarker(latlng, markers);
         }
     });
-
+    // console.log(stations)
     createMap(stations);
 }
 
-function getMarkerColor(feature) {
-    // Add your logic to determine marker color based on feature properties
-    // Example:
-    // if (feature.properties.someProperty === someValue) {
-    //     return "green";
-    // } else {
-    //     return "red";
-    // }
-    return "red"; // Default color if no condition matches
-}
+// function getMarkerColor(feature) {
+//     Add your logic to determine marker color based on feature properties
+//     Example:
+//     if (feature.properties.someProperty === someValue) {
+//         return "green";
+//     } else {
+//         return "red";
+//     }
+//     return "red"; // Default color if no condition matches
+// }
 
 function createMap(stations) {
     let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -63,11 +63,13 @@ function createMap(stations) {
     let myMap = L.map("map", {
         center: [37.09, -95.71],
         zoom: 5,
-        layers: [street, stations]
+        layers: [street]
     });
-    
+    console.log("hi")
 
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(myMap);
 }
+
+
