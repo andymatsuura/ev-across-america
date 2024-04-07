@@ -5,6 +5,46 @@ d3.json(url).then(function(data) {
     createFeatures(data.features);
 });
 
+function chargerNumber(feature) {
+    let result = [];
+
+    const level1Chargers = feature.properties.ev_level1_evse_num;
+    const level2Chargers = feature.properties.ev_level2_evse_num;
+    const dcChargers = feature.properties.ev_dc_fast_num;
+    
+    if (level1Chargers === null && level2Chargers === null && dcChargers === null) {
+        result.push(null);
+    } else if (level1Chargers === null && level2Chargers === null) {
+        result.push(dcChargers);
+    } else if (level1Chargers === null && dcChargers === null) {
+        result.push(level2Chargers);
+    } else if (level2Chargers === null && dcChargers === null) {
+        result.push(level1Chargers);
+    } else if (level1Chargers === null) {
+        result.push(level2Chargers + dcChargers);
+    } else if (level2Chargers === null) {
+        result.push(level1Chargers + dcChargers);
+    } else if (dcChargers === null) {
+        result.push(level1Chargers + level2Chargers);
+    } else {
+        result.push(level1Chargers + level2Chargers + dcChargers);
+    }
+
+    return result
+}
+
+function MarkerColor(feature) {
+    const chargers = chargerNumber(feature);
+
+    if (chargers === null) return "black"; // No chargers available
+
+    // Define color thresholds based on the number of chargers
+    if (chargers >= 25) return "green"; // High availability
+    else if (chargers >= 15) return "orange"; // Medium availability
+    else if (chargers >= 5) return "#66ff00"; // Low availability
+    else return "#ffc1cc"; // Very low availability
+};
+
 function createFeatures(electricVehicleStations) {
     function onEachFeature(feature, layer) {
         layer.bindPopup(`<h3>Name: ${feature.properties.station_name}</h3><hr>
@@ -14,13 +54,12 @@ function createFeatures(electricVehicleStations) {
     let stations = L.geoJSON(electricVehicleStations, {
         onEachFeature: onEachFeature,
         pointToLayer: function (feature, latlng) {
-            // let fillColor = getMarkerColor(feature); // Get marker color dynamically
             let markers = {
-                radius: 1,
-                fillColor: "red",
+                radius: 10,
+                fillColor: MarkerColor(feature),
                 weight: 1,
                 opacity: 1, 
-                color: "black",
+                color: "white",
                 stroke: true,
                 fillOpacity: 0.8
             };
@@ -30,17 +69,6 @@ function createFeatures(electricVehicleStations) {
     // console.log(stations)
     createMap(stations);
 }
-
-// function getMarkerColor(feature) {
-//     Add your logic to determine marker color based on feature properties
-//     Example:
-//     if (feature.properties.someProperty === someValue) {
-//         return "green";
-//     } else {
-//         return "red";
-//     }
-//     return "red"; // Default color if no condition matches
-// }
 
 function createMap(stations) {
     let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -65,11 +93,28 @@ function createMap(stations) {
         zoom: 5,
         layers: [street]
     });
-    console.log("hi")
 
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(myMap);
-}
+
+    let legend = L.control({position: "bottomright"});
+    legend.onAdd = function() {
+        let div = L.DomUtil.create("div", "info legend");
+        let chargerAmount = [25, 15, 5, 0]; 
+    
+        div.innerHTML += "<h3>Charger Number</h3><hr><p>Radius: 210 miles</p>";
+    
+        for (let i = 0; i < chargerAmount.length; i++) {
+            let color = MarkerColor(chargerAmount[i]);
+            div.innerHTML +=
+                '<i style="background:' + color + '"></i> ' +
+                chargerAmount[i] + (chargerAmount[i + 1] ? '&ndash;' + chargerAmount[i + 1] + '<br>' : '+');
+        }
+        return div;
+    };
+    legend.addTo(myMap);
+    
+};
 
 
