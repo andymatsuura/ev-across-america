@@ -8,32 +8,32 @@ d3.json(url).then(function(data) {
 function chargerNumber(feature) {
     let result = [];
 
-    const level1Chargers = feature.properties.ev_level1_evse_num;
-    const level2Chargers = feature.properties.ev_level2_evse_num;
-    const dcChargers = feature.properties.ev_dc_fast_num;
+    const level1Charger = feature.properties.ev_level1_evse_num || 0;
+    const level2Charger = feature.properties.ev_level2_evse_num || 0;
+    const dcCharger = feature.properties.ev_dc_fast_num || 0;
     
-    if (level1Chargers === null && level2Chargers === null && dcChargers === null) {
+    if (level1Charger === null && level2Charger === null && dcCharger === null) {
         result.push(null);
-    } else if (level1Chargers === null && level2Chargers === null) {
-        result.push(dcChargers);
-    } else if (level1Chargers === null && dcChargers === null) {
-        result.push(level2Chargers);
-    } else if (level2Chargers === null && dcChargers === null) {
-        result.push(level1Chargers);
-    } else if (level1Chargers === null) {
-        result.push(level2Chargers + dcChargers);
-    } else if (level2Chargers === null) {
-        result.push(level1Chargers + dcChargers);
-    } else if (dcChargers === null) {
-        result.push(level1Chargers + level2Chargers);
+    } else if (level1Charger === null && level2Charger === null) {
+        result.push(dcCharger);
+    } else if (level1Charger === null && dcCharger === null) {
+        result.push(level2Charger);
+    } else if (level2Charger === null && dcCharger === null) {
+        result.push(level1Charger);
+    } else if (level1Charger === null) {
+        result.push(level2Charger + dcCharger);
+    } else if (level2Charger === null) {
+        result.push(level1Charger + dcCharger);
+    } else if (dcCharger === null) {
+        result.push(level1Charger + level2Charger);
     } else {
-        result.push(level1Chargers + level2Chargers + dcChargers);
+        result.push(level1Charger + level2Charger + dcCharger);
     }
 
     return result
 }
 
-function MarkerColor(feature) {
+function markerColor(feature) {
     const chargers = chargerNumber(feature);
 
     if (chargers === null) return "black"; // No chargers available
@@ -42,7 +42,7 @@ function MarkerColor(feature) {
     if (chargers >= 25) return "green"; // High availability
     else if (chargers >= 15) return "orange"; // Medium availability
     else if (chargers >= 5) return "#66ff00"; // Low availability
-    else return "#ffc1cc"; // Very low availability
+    else return "##ff0000"; // Very low availability
 };
 
 function createFeatures(electricVehicleStations) {
@@ -56,7 +56,7 @@ function createFeatures(electricVehicleStations) {
         pointToLayer: function (feature, latlng) {
             let markers = {
                 radius: 10,
-                fillColor: MarkerColor(feature),
+                fillColor: markerColor(feature),
                 weight: 1,
                 opacity: 1, 
                 color: "white",
@@ -106,7 +106,7 @@ function createMap(stations) {
         div.innerHTML += "<h3>Charger Number</h3><hr><p>Radius: 210 miles</p>";
     
         for (let i = 0; i < chargerAmount.length; i++) {
-            let color = MarkerColor(chargerAmount[i]);
+            let color = markerColor(chargerAmount[i]);
             div.innerHTML +=
                 '<i style="background:' + color + '"></i> ' +
                 chargerAmount[i] + (chargerAmount[i + 1] ? '&ndash;' + chargerAmount[i + 1] + '<br>' : '+');
