@@ -95,8 +95,7 @@ function createFeatures(electricVehicleStations) {
     });
 
     let overlayMaps = {
-        "EV Stations": stations_radius,
-
+        "EV Stations": stations_radius
     };
 
     L.control.layers(baseMaps, overlayMaps, {
