@@ -43,39 +43,6 @@ function markerColor(chargers) {
 };
 
 function createFeatures(electricVehicleStations) {
-    // function onEachFeature(feature, layer) {
-    //     layer.bindPopup(`<h3>Name: ${feature.properties.station_name}</h3><hr>
-    //         <p>Address: ${feature.properties.street_address}</p><hr><p>Network: ${feature.properties.ev_network}</p><hr><p>Accessibility: ${feature.properties.access_days_time}</p>`);
-    // }
-    // var centerLatLng = myMap.getCenter(); // get map center
-    // var pointC = myMap.latLngToContainerPoint(centerLatLng); // convert to containerpoint (pixels)
-    // var pointX = [pointC.x + 1, pointC.y]; // add one pixel to x
-    // var pointY = [pointC.x, pointC.y + 1]; // add one pixel to y
-
-    // // convert containerpoints to latlng's
-    // var latLngC = map.containerPointToLatLng(pointC);
-    // var latLngX = map.containerPointToLatLng(pointX);
-    // var latLngY = map.containerPointToLatLng(pointY);
-
-    // var distanceX = latLngC.distanceTo(latLngX); // calculate distance between c and x (latitude)
-    // var distanceY = latLngC.distanceTo(latLngY); // calculate distance between c and y (longitude)
-
-    // let stations = L.geoJSON(electricVehicleStations, {
-    //     onEachFeature: onEachFeature,
-    //     pointToLayer: function (feature, latlng) {
-    //         let markers = {
-    //             radius: 210 / distanceX,
-    //             fillColor: markerColor(chargerNumber(feature)),
-    //             weight: 1,
-    //             opacity: 1, 
-    //             color: "white",
-    //             stroke: true,
-    //             fillOpacity: 0.8
-    //         };
-    //         return L.circleMarker(latlng, markers);
-    //     }
-    // });
-    // console.log(stations)
     function onEachFeature(feature, layer) {
         layer.bindPopup(`<h3>Name: ${feature.properties.station_name}</h3><hr>
             <p>Address: ${feature.properties.street_address}</p><hr><p>Network: ${feature.properties.ev_network}</p><hr><p>Accessibility: ${feature.properties.access_days_time}</p>`);
@@ -102,40 +69,34 @@ function createFeatures(electricVehicleStations) {
         layers: [street]
     });
 
-    var centerLatLng = myMap.getCenter(); // get map center
-    var pointC = myMap.latLngToContainerPoint(centerLatLng); // convert to containerpoint (pixels)
-    var pointX = [pointC.x + 1, pointC.y]; // add one pixel to x
-    var pointY = [pointC.x, pointC.y + 1]; // add one pixel to y
+    function metresPerPixel(myMap) {
+        const southEastPoint = myMap.getBounds().getSouthEast();
+        const northEastPoint = myMap.getBounds().getNorthEast();
+        const mapHeightInMetres = southEastPoint.distanceTo(northEastPoint);
+        const mapHeightInPixels = myMap.getSize().y;
+    
+        return mapHeightInMetres / mapHeightInPixels;
+    }
 
-    // convert containerpoints to latlng's
-    var latLngC = myMap.containerPointToLatLng(pointC);
-    var latLngX = myMap.containerPointToLatLng(pointX);
-    var latLngY = myMap.containerPointToLatLng(pointY);
-
-    var distanceX = latLngC.distanceTo(latLngX); // calculate distance between c and x (latitude)
-    // var distanceY = latLngC.distanceTo(latLngY); // calculate distance between c and y (longitude)
-    console.log(distanceX)
-    console.log(pointC.x)
-    console.log(latLngC)
-
-    let stations = L.geoJSON(electricVehicleStations, {
+    let stations_radius = L.geoJSON(electricVehicleStations, {
         onEachFeature: onEachFeature,
         pointToLayer: function (feature, latlng) {
             let markers = {
-                radius: 210 / distanceX * 100,
+                radius: (210 * 1609) /metresPerPixel(myMap),
                 fillColor: markerColor(chargerNumber(feature)),
                 weight: 1,
-                opacity: 1, 
+                opacity: 0.1, 
                 color: "white",
                 stroke: true,
-                fillOpacity: 0.8
+                fillOpacity: 0.1
             };
             return L.circleMarker(latlng, markers);
         }
     });
 
     let overlayMaps = {
-        "EV Stations": stations
+        "EV Stations": stations_radius,
+
     };
 
     L.control.layers(baseMaps, overlayMaps, {
