@@ -18,6 +18,9 @@ create table car_data(
     Price_USD float not null
 );
 
+create table station_data(
+    
+)
 -- Import the CSV files via the copy method 
 copy car_data(
     Brand,
