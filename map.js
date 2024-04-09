@@ -94,8 +94,25 @@ function createFeatures(electricVehicleStations) {
         }
     });
 
+    let station_locations = L.geoJSON(electricVehicleStations, {
+        onEachFeature: onEachFeature,
+        pointToLayer: function(feature, latlng) {
+            let markers = {
+                radius: 3,
+                fillColor: markerColor(chargerNumber(feature)),
+                weight: 1,
+                opacity: 1, 
+                color: "white",
+                stroke: true, 
+                fillOpacity: 0.7
+            };
+            return L.circleMarker(latlng, markers);
+        }
+    })
+
     let overlayMaps = {
-        "EV Stations": stations_radius
+        "Average Range From Each Station": stations_radius,
+        "EV Station Locations": station_locations
     };
 
     L.control.layers(baseMaps, overlayMaps, {
