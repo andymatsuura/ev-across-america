@@ -156,6 +156,7 @@ COPY US_EV_Stations(
 )
 FROM '/tmp/us_ev_stations.csv' DELIMITER ',' CSV HEADER;
 
+-- Assuring everything imported successfully before running queries
 
 select * FROM car_data;
 
@@ -164,3 +165,11 @@ select * from station_data;
 SELECT * FROM ev_sales;
 
 SELECT * FROM us_ev_stations;
+
+
+--Show least expensive EV's from car_data using aggregate functions
+SELECT brand, model, range_miles, CAST(MIN(price_USD) AS NUMERIC(10,0)) AS lowest_price
+FROM car_data
+GROUP BY brand, model, range_miles
+ORDER BY lowest_price;
+
