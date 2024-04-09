@@ -1,8 +1,12 @@
 -- Active: 1708568248123@@127.0.0.1@5432@EV_Database
-drop table if exists car_data;
-drop table if exists station_data;
+DROP TABLE if EXISTS car_data;
+DROP TABLE if EXISTS station_data;
 
-create table car_data(
+DROP TABLE if EXISTS ev_sales;
+
+DROP TABLE if EXISTS us_ev_stations;
+
+CREATE TABLE car_data(
     Brand VARCHAR(15) not null,
     Model VARCHAR(40) not null,
     AccelSec FLOAT not null,
@@ -51,6 +55,31 @@ create table station_data(
     EV_Pricing VARCHAR (151),
     EV_Workplace_Charging VARCHAR (25)
 );
+
+-- Create EV_Sales table
+CREATE TABLE ev_sales(
+    ID int not null,
+    Vehichle VARCHAR (50) not null,
+    Type VARCHAR (50) not null,
+    year_2011 int not null,
+    year_2012 int,
+    year_2013 int,
+    year_2014 int,
+    year_2015 int,
+    year_2016 int,
+    year_2017 int,
+    year_2018 int,
+    year_2019 int
+);
+
+-- Create US_EV_Stations (snake cased the csv directly since it's on the smaller side)
+CREATE TABLE us_ev_stations(
+    ID INT not NULL,
+    Year INT not NULL,
+    EV_Charging_Ports INT NOT NULL,
+    Station_Locations INT NOT NULL
+);
+
 -- Import the CSV files via the copy method 
 copy car_data(
     Brand,
@@ -103,7 +132,35 @@ copy station_data(
 )
 from '/tmp/andy_snake_df.csv' DELIMITER ',' csv header;
 
-select max(Range_miles) from car_data GROUP BY model;
-select * from car_data;
+COPY ev_sales(
+    ID,
+    Vehichle,
+    Type,
+    year_2011,
+    year_2012,
+    year_2013,
+    year_2014,
+    year_2015,
+    year_2016,
+    year_2017,
+    year_2018,
+    year_2019
+)
+from '/tmp/ev_sales.csv' DELIMITER ',' csv HEADER;
+
+COPY US_EV_Stations(
+    ID,
+    Year,
+    EV_Charging_Ports,
+    Station_Locations
+)
+FROM '/tmp/us_ev_stations.csv' DELIMITER ',' CSV HEADER;
+
+
+select * FROM car_data;
 
 select * from station_data;
+
+SELECT * FROM ev_sales;
+
+SELECT * FROM us_ev_stations;
