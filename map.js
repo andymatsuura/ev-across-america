@@ -124,7 +124,7 @@ function createFeatures(electricVehicleStations) {
         let div = L.DomUtil.create("div", "info legend");
         let chargerAmount = [0, 5, 15, 25]; 
     
-        div.innerHTML += "<h3>Charger Number</h3><hr><p>Radius: Approximately 210 miles</p>";
+        div.innerHTML += "<h3>Charger Number</h3><hr><p>Radius ~210 miles in Average Range Selection</p>";
     
         for (let i = 0; i < chargerAmount.length; i++) {
             if (i === chargerAmount.length - 1) {
