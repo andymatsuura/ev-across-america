@@ -59,7 +59,7 @@ create table station_data(
 -- Create EV_Sales table
 CREATE TABLE ev_sales(
     ID int not null,
-    Vehichle VARCHAR (50) not null,
+    Vehicle VARCHAR (50) not null,
     Type VARCHAR (50) not null,
     year_2011 int not null,
     year_2012 int,
@@ -134,7 +134,7 @@ from '/tmp/andy_snake_df.csv' DELIMITER ',' csv header;
 
 COPY ev_sales(
     ID,
-    Vehichle,
+    Vehicle,
     Type,
     year_2011,
     year_2012,
@@ -173,3 +173,15 @@ FROM car_data
 GROUP BY brand, model, range_miles
 ORDER BY lowest_price;
 
+
+--Show latitude/longtitude of all EV Stations across the US with their respective Station Name, Address, City and State
+SELECT station_name, city, state, latitude as lat, longtitude as long 
+FROM station_data;
+
+--Show difference of amount of EV Stations from 2011 to 2023
+SELECT year, station_locations
+FROM us_ev_stations;
+
+-- Query how many EV's were sold in the years 2011, 2015, and 2019 to demonstrate purchase trends
+SELECT vehicle, year_2011, year_2015, year_2019
+FROM ev_sales;
