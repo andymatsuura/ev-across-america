@@ -31,7 +31,7 @@ The marker radius is scaled down to better visualize the locations of electric v
 
 # Based on average distance capable on a full battery, you can definitely cross the US in an electric vehicle
 
-This overlay option represents the average range of an electric vehicle centered at each charging station, representing the potential distance capabilities of an EV. There is a high degree of overlap. The average range was calculated by taking the range of more than 100 EV's and finding their mean. While some cars would have greater or less range, this is a good representation of how far an EV can theoretically go. After finding out the average range (~210 miles), the pixels in the leaflet map were converted to meters and then miles. 
+This overlay option represents the average range of an electric vehicle centered at each charging station, representing the potential distance capabilities of an EV. There is a high degree of overlap. The average range was calculated by taking the range of more than 100 EV's and finding their mean. After finding out the average range (~210 miles), the pixels in the leaflet map were converted to meters and then miles. 
 
 ![alt text](output/radius_range.png)
 
