@@ -60,10 +60,12 @@ Using the visualization library, seaborn, graphs were generated to display the a
 We wanted to integrate the data pulled from online resources into a database so the users viewing this analysis can not only see the possibilities of driving an electric vehichle across the US, but can also effectively make a fact driven decision on which Electric Vehichle they can purchase based on budget and over-all needs.
 
 ## ETL Process
-The initial phases of the ETL process included the utilization of Pandas to create Dataframes that we could transform before loading it into our SQL Database. Most notably, we snake_cased all of the csv files to avoid errors while loading them into SQL and executed formulas with numpy to convert data from the metric system to imperial units. 
+The initial phases of the ETL process included the utilization of Pandas to create Dataframes that we could transform before loading it into our SQL Database. Most notably, we snake_cased all of the csv files to avoid errors while loading them into SQL and executed formulas with numpy to convert data from metric to imperial units. 
 
 ## Choice of storing data
 Provided the given csv files were all structured and could follow ACID requirements, a PostgreSQL database suited best for storage neccessities. Inititialized in pgAdmin 4, the Database named "EV_Database" was created and connected via VS Code. From there, an assortment of tables were created in the schema.sql file including car_data, station_data, ev_sales, and us_ev_stations. Utilizing the copy method, the transformed csv files that underwent an ETL process were successfully imported into our database. 
+
+![image](https://github.com/andymatsuura/ev-across-america/assets/150174589/7a61e39e-040d-4a28-9da4-ca6dceea911d)
 
 ## Further manipulation of data
 To provide more assurance to users as to how feasible it would be to purchase an electric vehichle to drive across the US, a query was ran to show (from least expensive to most), a table of Brands/Models of EV's and their respective price. Along with other queries demonstrating locations of EV stations and their latitude/longitude, the difference of amounts of EV Stations from the year 2011 to 2023, and purchase trends of EV's in the years 2011, 2015, and 2019.
