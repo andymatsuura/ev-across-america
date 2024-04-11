@@ -27,13 +27,13 @@ Please view our Github Pages site to interact with the leaflet visualization of 
 
 The marker radius is scaled down to better visualize the locations of electric vehicle stations. When clicking on any particular charging station, the name, address, charging network and hours of operation are displayed. The markers are colored by the amount of chargers available, which can be further explained in the legend. It should be noted that while there are charging stations available in the corridors traveling from coast to coast, they are few in number. This can be a useful tool for planning a long distance trip with an electric vehicle.
 
-![alt text](image-1.png)
+![alt text](output/station_locations.png)
 
 # Based on average distance capable on a full battery, you can definitely cross the US in an electric vehicle
 
 This overlay option represents the average range of an electric vehicle centered at each charging station, representing the potential distance capabilities of an EV. There is a high degree of overlap. The average range was calculated by taking the range of more than 100 EV's and finding their mean. While some cars would have greater or less range, this is a good representation of how far an EV can theoretically go. After finding out the average range (~210 miles), the pixels in the leaflet map were converted to meters and then miles. 
 
-![alt text](image.png)
+![alt text](output/radius_range.png)
 
 # This graph visualizes the growth of charging station and charging ports in the US year over year from 2011 to 2023. 
 
@@ -48,11 +48,9 @@ While the rate of growth is very high, there seems to be a dip between 2018 and 
 
 Using the visualization library, seaborn, graphs were generated to display the average price and range of common electric vehicles on the market. Average prices of electric vehicles are fairly high. With current loan rates exceeding 10% interest and average car prices outpacing increases in salary, the new car is not something that the average American family can afford (Money). When viewing the average battery range of EV's, it is found that the most expensive cars tend to have the best range. 
 
-![alt text](image-2.png)
+![alt text](output/ev_price.png)
 
-![alt text](image.png)
-
-# The decision was made to use Seaborn, which is a dependency built on top of Matplotlib to create more visually appealing graphs, and above all to add inclusivity, the color palette "colorblind" was chosen for the graphs in the Car_Data.ipynb file.
+![alt text](output/avg_range.png)
 
  Because it is a fairly new technology, the longevity of these costly vehicles is not well understood. However, the lithium batteries powering these cars degrade at a rate of approximately 2.3% per year, meaning over time range will inevitably decrease (KTLA). The shift towards electric vehicles is losing steam, and automakers, including Ford, are favoring hybrid production, as a stepping stone towards broader electrificiation and as a means to meet more stringent federal standards for emissions (CNBC). 
 
