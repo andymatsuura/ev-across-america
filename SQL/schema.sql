@@ -156,19 +156,8 @@ COPY US_EV_Stations(
 )
 FROM '/tmp/us_ev_stations.csv' DELIMITER ',' CSV HEADER;
 
--- Assuring everything imported successfully before running queries
-
-select * FROM car_data;
-
-select * from station_data;
-
-SELECT * FROM ev_sales;
-
-SELECT * FROM us_ev_stations;
-
-
 --Show least expensive EV's from car_data using aggregate functions
-SELECT brand, model, range_miles, CAST(MIN(price_USD) AS NUMERIC(10,0)) AS lowest_price
+SELECT brand, model, range_miles AS AVG_Range, CAST(MIN(price_USD) AS NUMERIC(10,0)) AS lowest_price
 FROM car_data
 GROUP BY brand, model, range_miles
 ORDER BY lowest_price;
@@ -185,3 +174,13 @@ FROM us_ev_stations;
 -- Query how many EV's were sold in the years 2011, 2015, and 2019 to demonstrate purchase trends
 SELECT vehicle, year_2011, year_2015, year_2019
 FROM ev_sales;
+
+-- Assuring everything imported successfully before running queries
+
+select * FROM car_data;
+
+select * from station_data;
+
+SELECT * FROM ev_sales;
+
+SELECT * FROM us_ev_stations;
