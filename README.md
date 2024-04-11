@@ -39,7 +39,7 @@ This overlay option represents the average range of an electric vehicle centered
 
 ![alt text](output/station_graph.png)
 
-# The rollout of chargers and charging stations is essential for broader adoption of electric vehicles. While the number of chargers and charging stations is growing at a rapid rate, range anxiety and lack of charging infrastructure remain a concern among prospective EV buyers (NYT). 
+The rollout of chargers and charging stations is essential for broader adoption of electric vehicles. While the number of chargers and charging stations is growing at a rapid rate, range anxiety and lack of charging infrastructure remain a concern among prospective EV buyers (NYT). 
 
 ![alt text](output/ev_sales.png)
 
@@ -50,7 +50,7 @@ Using the visualization library, seaborn, graphs were generated to display the a
 
 ![alt text](image-2.png)
 
-![alt text](image-3.png)
+![alt text](image.png)
 
 # The decision was made to use Seaborn, which is a dependency built on top of Matplotlib to create more visually appealing graphs, and above all to add inclusivity, the color palette "colorblind" was chosen for the graphs in the Car_Data.ipynb file.
 
