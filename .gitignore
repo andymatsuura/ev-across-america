@@ -1,3 +1,7 @@
 *.geojson
 *.ipynb_checkpoints
+<<<<<<< HEAD
 .DS_Store
+=======
+*.DS_Store
+>>>>>>> 157cb0da99d560aec32dda5c5b2833ffd4a8ef7c
