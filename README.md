@@ -70,6 +70,14 @@ Provided the given csv files were all structured and could follow ACID requireme
 ## Further manipulation of data
 To provide more assurance to users as to how feasible it would be to purchase an electric vehichle to drive across the US, a query was ran to show (from least expensive to most), a table of Brands/Models of EV's and their respective price. Along with other queries demonstrating locations of EV stations and their latitude/longitude, the difference of amounts of EV Stations from the year 2011 to 2023, and purchase trends of EV's in the years 2011, 2015, and 2019.
 
+## Extracting Data for future use
+There are two methods of generating the data for future use:
+### Option 1
+Extract the neccessary csv files from the data folder and then run the code from each file in our notebook folder. This will generate the same outputs and tables neccessary if you wish to further manipulate the data this way. 
+### Option 2
+Reading from the database using libraries "pandas.io.sql" and "psycopg2". The latter will need to be pip installed via the terminal in your dev environment to work sufficiently.
+The next is to run the code in read_database.py. NOTE! You will need to enter your own postgresql username and password for it to extract the data properly. You will need to download an older version of pandas if you wish to use an environmental variable that is read from your .gitignore so your credentials are not jeopardized if pushed to a remote repository (Code instructions to accomplish this are found in sources below).
+
 ## Conclusion
 
 While data suggests that you can definitely drive an electric vehicle across the US, and the growth in EV production and sales continue to grow, there are several issues that are getting in the way of federal/global ambitions for electric vehicle adoption. Outside of the US, the coverage of EV chargers could be less reliable, and depending on the vehicle, the continued need to charge would be a hinderance for long distance travel. There are certainly certain regions where an electric vehicle would not be a sensible purchase, such as northern Montana. 
@@ -90,3 +98,5 @@ https://ktla.com/news/california/why-are-used-ev-prices-cratering-right-now-its-
 https://www.cnbc.com/2024/03/13/ev-euphoria-is-dead-automakers-trumpet-consumer-choice-in-us.html#:~:text=Automakers%20are%20scaling%20back%20or%20delaying%20their%20electric%20vehicle%20plans,-Published%20Wed%2C%20Mar&text=Automakers%20from%20Ford%20Motor%20and,delaying%20their%20electric%20vehicle%20plans. 
 
 https://www.nytimes.com/2023/12/23/us/politics/electric-vehicle-chargers-network.html 
+
+https://stackoverflow.com/questions/27884268/return-pandas-dataframe-from-postgresql-query-with-sqlalchemy
