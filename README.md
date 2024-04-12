@@ -1,4 +1,4 @@
-## Can you drive an electric vehicle across the US?
+# Can you drive an electric vehicle across the US?
 
 ## Overview
 
@@ -78,6 +78,10 @@ Extract the neccessary csv files from the data folder and then run the code from
 ### Option 2
 Reading from the database using libraries "pandas.io.sql" and "psycopg2". The latter will need to be pip installed via the terminal in your dev environment to work sufficiently.
 The next is to run the code in read_database.py. NOTE! You will need to enter your own postgresql username and password for it to extract the data properly. You will need to download an older version of pandas if you wish to use an environmental variable that is read from your .gitignore so your credentials are not jeopardized if pushed to a remote repository (Code instructions to accomplish this are found in sources below).
+
+## Ethical Considerations
+
+In this project, a large focus was on using the data for better environmental decisions, and promoting this among those who interact with our project. Our data was gathered from open-source material, and was processed in an unbiased manner. We try to use the data to inform others on good car purchases, and on where they can charge their vehicles. By trying to use the data for the greater good, we hope this information is able to positively impact others.
 
 ## Conclusion
 
