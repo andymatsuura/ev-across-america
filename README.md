@@ -81,7 +81,7 @@ The next is to run the code in read_database.py. NOTE! You will need to enter yo
 
 ## Ethical Considerations
 
-In this project, a large focus was on using the data for better environmental decisions, and promoting this among those who interact with our project. Our data was gathered from open-source material, and was processed in an unbiased manner. We try to use the data to inform others on good car purchases, and on where they can charge their vehicles. By trying to use the data for the greater good, we hope this information is able to positively impact others.
+Our data was gathered from open-source material, and was processed in an unbiased manner. Data was gathered from kaggle and the US Department of Energy's Alternative Fuels Data Center. We try to use the data to inform others on good car purchases, and on where they can charge their vehicles. By using this data for the greater good, we hope this information is able to positively impact others on their electric vehicle purchases. 
 
 ## Conclusion
 
