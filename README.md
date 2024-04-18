@@ -33,7 +33,7 @@ The marker radius is scaled down to better visualize the locations of electric v
 
 ![alt text](output/radius_range.png)
 
-This overlay option represents the average range of an electric vehicle centered at each charging station, representing the potential distance capabilities of an EV. There is a high degree of overlap. The average range was calculated by taking the range of more than 100 EV's and finding their mean. After finding out the average range (~210 miles), the pixels in the leaflet map were converted to meters and then miles. 
+This overlay option represents the average range of an electric vehicle centered at each charging station, representing the potential distance capabilities of an EV. There is a high degree of overlap. The average range was calculated by looking at more than 100 EV's range and finding their mean. After finding out the average range (~210 miles), the pixels in the leaflet map were converted to meters and then miles. 
 
 ## Charging stations and charging ports have grown immensely since 2011
 
