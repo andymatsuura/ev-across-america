@@ -7,7 +7,7 @@ The Bipartisan Infrastructure Deal, passed in 2021, made large investments in th
 Despite potential benefits and high regulatory pressure to convert to electric vehicles, there are several factors getting in the way of mass EV adoption, including charging infrastructure and price. The sales of electric vehicles is not on track to meet these targets. Thus, we set out to answer the question: can you drive across the US in an electric vehicle, and what implications does that have for the broader EV industry? We will look at charger availability, vehicle specifications and sales.
 
 ## Tools Used
-* Python/Pandas/Numpy
+* Python, Pandas, Numpy
 * Postgres SQL
 * Leaflet
 * HTML, CSS, Javascript
